@@ -1,2 +1,5 @@
 MusicLandscape
 MusicLandscape.entities
+MusicLandscape.util
+MusicLandscape.util.comparators
+MusicLandscape.util.formatters

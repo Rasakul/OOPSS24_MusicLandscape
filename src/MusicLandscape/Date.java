@@ -2,7 +2,7 @@
 //		
 //       git.rev = 234
 //  git.revision = fdd4980be270473bdd7e8206afeda65ab6e4c3a4
-//         stage = ES03
+//         stage = ES04
 //
 // ***************************************************
 package MusicLandscape;
@@ -14,10 +14,13 @@ import java.util.Scanner;
  * @author TeM
  * @author JS
  * @version 234
- * @Stage ES03
+ * @Stage ES04
  *
  */
 public class Date implements  java.lang.Comparable<Date>
+
+
+, MusicLandscape.util.ConsoleScanable
 
 
 {
@@ -369,6 +372,8 @@ public class Date implements  java.lang.Comparable<Date>
 	 * 
 	 * @return true if this date was modified during the operation, false otherwise
 	 */
+	
+	@Override
 	
 	public boolean scan() {
 		Scanner sc = new Scanner(System.in);
