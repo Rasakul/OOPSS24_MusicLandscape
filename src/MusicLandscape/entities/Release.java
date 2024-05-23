@@ -1,35 +1,35 @@
 package MusicLandscape.entities;
 
+/**
+ * This class represents a release of a specific artist, like an album or a music video.
+ */
 public abstract class Release {
 
     /**
-     * The artist that released this release.
-     * A null artist represents an unknown artist.
+     * The artist that released this release. A null artist represents an unknown artist. By default it is the default
+     * artist.
      */
-    private Artist artist;
+    private Artist artist = new Artist();
     /**
-     * The title of this release.
-     * A null title represents an unknown title.
+     * The title of this release. A null title represents an unknown title.
      */
     private String title;
     /**
-     * The year in which this release was released.
-     * The year cannot be negative, value 0 (zero) representing unknown year.
+     * The year in which this release was released. The year cannot be negative, value 0 (zero) representing unknown
+     * year. By default the year is 1900.
      */
-    private int year;
+    private int year = 1900;
 
 
     /**
-     * Creates a default release.
-     * A default release has default values for all fields (see there).
+     * Creates a default release. A default release has default values for all fields (see there).
      */
     public Release() {
 
     }
 
     /**
-     * Creates a copy of a release.
-     * This release is a deep copy of an existing release - the original.
+     * Creates a copy of a release. This release is a deep copy of an existing release - the original.
      */
     public Release(Release orig) {
         this.title = orig.title;
@@ -50,63 +50,70 @@ public abstract class Release {
     /**
      * Get the artist of this release.
      */
-    Artist getArtist() {
+    public Artist getArtist() {
         return artist;
     }
 
     /**
-     * Get the title of this release.
-     * If the title is unknown a null String is returned.
+     * Set the artist of this release. This method accepts null arguments.
      */
-    String getTitle() {
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
+    /**
+     * Get the title of this release. If the title is unknown a null String is returned.
+     */
+    public String getTitle() {
         return title;
+    }
+
+    /**
+     * Set the title of this release. This method accepts null Strings.
+     */
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
      * Get the year in which this release was released.
      */
-    int getYear() {
+    public int getYear() {
         return year;
     }
 
     /**
-     * Set the artist of this release.
-     * This method accepts null arguments.
+     * Set the year of this release. If the argument is outside the allowed range it is ignored.
      */
-    void setArtist(Artist artist) {
-        this.artist = artist;
+    public void setYear(int year) {
+        if (year >= 0) this.year = year;
     }
 
     /**
-     * Set the title of this release.
-     * This method accepts null Strings.
-     */
-    void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
-     * Set the year of this release.
-     * If the argument is outside the allowed range it is ignored.
-     */
-    void setYear(int year) {
-        this.year = year;
-    }
-
-    /**
-     * Get a textual representation of this release.
-     * The string representation of a release is "title-artist-year-totaltime" (without quotes and all names
-     * substituted with their respective values) unknown field are represented by the string "unknown" (without quotes)
+     * Get a textual representation of this release. The string representation of a release is
+     * "title-artist-year-totaltime" (without quotes and all names substituted with their respective values) unknown
+     * field are represented by the string "unknown" (without quotes)
      **/
     @Override
     public java.lang.String toString() {
-        return "title-artist-year-totaltime";
+        String titleToString;
+        if (title == null) {
+            titleToString = "unknown";
+        } else {
+            titleToString = title;
+        }
+        String yearToString;
+        if (year == 0) {
+            yearToString = "unknown";
+        } else {
+            yearToString = String.valueOf(year);
+        }
+        return titleToString + "-" + artist.toString() + "-" + yearToString + "-" + totalTime();
     }
 
     /**
-     * Get the total time of this release.
-     * The implementation of this method is left to concrete subclasses.
+     * Get the total time of this release. The implementation of this method is left to concrete subclasses.
      */
-    abstract int totalTime();
+    public abstract int totalTime();
 
 }
